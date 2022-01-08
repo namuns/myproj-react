@@ -3,6 +3,7 @@ import DebugStates from 'components/DebugStates';
 import { useState, useEffect } from 'react';
 import Review from 'components/Review';
 import { useNavigate } from 'react-router-dom';
+import editReview from './ReviewForm';
 
 function PageReviewList() {
   const [loading, setLoading] = useState(false);
@@ -56,7 +57,7 @@ function PageReviewList() {
       //       }
       //   );
       // });
-      //2. 전체를 새로고침
+      //2. 전체를 새로고침하는 방법(비효율)
 
       .catch((error) => {
         setError(error);
@@ -92,6 +93,7 @@ function PageReviewList() {
           <Review
             key={review.id}
             review={review}
+            handleEdit={() => editReview(review)}
             handleDelete={() => deleteReview(review)}
           />
         ))}
