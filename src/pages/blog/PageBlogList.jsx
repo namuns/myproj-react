@@ -2,11 +2,13 @@ import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import Post from 'components/blog/BlogList';
+import { useNavigate } from 'react-router-dom';
 
 function BlogList() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [postList, setPostList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     refetch();
@@ -65,10 +67,18 @@ function BlogList() {
         새로고침
       </button>
 
+      <button
+        onClick={() => navigate('/blog/new')}
+        className="bg-blue-400 hover:bg-slate-400"
+      >
+        새 포스팅
+      </button>
+
       <div className="bg-blue-200">
         {postList.map((post) => (
           <Post
             key={post.id}
+            handleEdit={() => navigate(`/blog/${post.id}/edit`)}
             handleDelete={() => deletePost(post)}
             post={post}
           />
