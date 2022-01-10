@@ -7,6 +7,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import ReviewForm from 'pages/reviews/ReviewForm';
 
 import './App.css';
+import PageBlog from 'pages/blog/PageBlog';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/reviews/" element={<ReviewList />} />
         <Route path="reviews/new/" element={<ReviewForm />} />
         <Route path="/examples/components/" element={<Components />} />
+        <Route path="/blog/" element={<PageBlog />} />
       </Routes>
     </div>
   );
