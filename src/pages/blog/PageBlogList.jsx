@@ -78,7 +78,7 @@ function BlogList() {
         {postList.map((post) => (
           <Post
             key={post.id}
-            handleEdit={() => navigate(`/blog/${post.id}/edit`)}
+            handleEdit={() => navigate(`/blog/${post.id}/edit/`)}
             handleDelete={() => deletePost(post)}
             post={post}
           />

@@ -1,4 +1,4 @@
-function Post({ post, handleDetail, handleDelete }) {
+function Post({ post, handleDetail, handleDelete, handleEdit }) {
   const { title } = post;
   return (
     <div
@@ -7,7 +7,7 @@ function Post({ post, handleDetail, handleDelete }) {
     >
       <div>
         <span
-          onClick={() => {}}
+          onClick={() => handleEdit()}
           className="hover:text-red-400 cursor-pointer mr-1"
         >
           수정

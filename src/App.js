@@ -8,6 +8,7 @@ import ReviewForm from 'pages/reviews/ReviewForm';
 
 import './App.css';
 import BlogList from 'pages/blog/PageBlogList';
+import BlogForm from 'pages/blog/PageBlogForm';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="reviews/new/" element={<ReviewForm />} />
         <Route path="/examples/components/" element={<Components />} />
         <Route path="/blog/" element={<BlogList />} />
+        <Route path="/blog/:postId/edit" element={<BlogForm />} />
+        <Route path="/blog/new" element={<BlogForm />} />
       </Routes>
     </div>
   );
