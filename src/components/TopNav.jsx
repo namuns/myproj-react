@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function TopNav() {
   return (
-    <div className="my-3">
+    <div className="my-3 p-6 m-auto max-w-md m-auto">
       <ul className="flex gap-4">
         <li>
           <MyLink to="/accounts/login/">로그인</MyLink>

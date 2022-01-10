@@ -53,8 +53,8 @@ function PageBlogForm() {
   return (
     <div>
       <h2>
-        PageBlogForm
-        {postId ? '수정' : '생성'}
+        블로그 포스팅
+        {postId ? ' 수정하기' : ' 쓰기'}
       </h2>
       <PostForm
         fieldValues={fieldValues}

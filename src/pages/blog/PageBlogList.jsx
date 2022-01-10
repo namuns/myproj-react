@@ -54,27 +54,23 @@ function BlogList() {
   };
 
   return (
-    <div className="text-red-400 text-lg border-l-4 border-red-500 pl-1 mb-2">
+    <div className="max-w-md m-auto">
       <h2>BlogList</h2>
-
       {loading && <div>로딩..</div>}
       {error && <div>통신 오류!</div>}
-
       <button
         onClick={() => refetch()}
         className="bg-yellow-400 hover:bg-red-400"
       >
         새로고침
       </button>
-
       <button
         onClick={() => navigate('/blog/new')}
         className="bg-blue-400 hover:bg-slate-400"
       >
         새 포스팅
       </button>
-
-      <div className="bg-blue-200">
+      <div className="bg-red-200 max-w-md m-auto">
         {postList.map((post) => (
           <Post
             key={post.id}
