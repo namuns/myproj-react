@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
+import Post from 'components/blog/BlogList';
 
 function BlogList() {
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,11 @@ function BlogList() {
         새로고침
       </button>
 
+      <div className="bg-blue-200">
+        {postList.map((post) => (
+          <Post post={post} />
+        ))}
+      </div>
       <hr />
       <DebugStates postList={postList} />
     </div>
