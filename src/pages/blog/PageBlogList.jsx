@@ -32,6 +32,25 @@ function BlogList() {
       });
   };
 
+  const deletePost = (deletingPost) => {
+    const { id: deletingPostId } = deletingPost;
+    const url = `http://localhost:8000/blog/api/posts/${deletingPostId}/`;
+
+    setLoading(true);
+    setError(null);
+
+    Axios.delete(url)
+      .then(() => {
+        setPostList((prevPostList) =>
+          prevPostList.filter((post) => post.id !== deletingPostId),
+        );
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <div className="text-red-400 text-lg border-l-4 border-red-500 pl-1 mb-2">
       <h2>BlogList</h2>
@@ -48,7 +67,11 @@ function BlogList() {
 
       <div className="bg-blue-200">
         {postList.map((post) => (
-          <Post post={post} />
+          <Post
+            key={post.id}
+            handleDelete={() => deletePost(post)}
+            post={post}
+          />
         ))}
       </div>
       <hr />
