@@ -1,10 +1,7 @@
-function Post({ post, handleDetail, handleDelete, handleEdit }) {
+function Post({ post, handleDelete, handleEdit, navigate }) {
   const { title } = post;
   return (
-    <div
-      className="bg-blue-50 border border-gray-500 my-1 p-1 cursor-pointer"
-      onClick={() => handleDetail()}
-    >
+    <div className="bg-blue-50 border border-gray-500 my-1 p-1 cursor-pointer">
       <div>
         <span
           onClick={() => handleEdit()}
@@ -19,7 +16,15 @@ function Post({ post, handleDetail, handleDelete, handleEdit }) {
           삭제
         </span>
       </div>
-      {title}
+
+      <h2
+        className="hover:text-gray-400 cursor-pointer"
+        onClick={() => {
+          navigate(`/blog/${post.id}/`);
+        }}
+      >
+        {title}
+      </h2>
     </div>
   );
 }
