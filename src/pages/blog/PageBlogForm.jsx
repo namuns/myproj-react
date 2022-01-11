@@ -4,6 +4,7 @@ import PostForm from 'components/blog/BlogForm';
 import useFieldValues from 'hooks/useFieldValues';
 import Axios from 'axios';
 import { useEffect, useState } from 'react/cjs/react.development';
+import { API_HOST } from 'Constants';
 
 function PageBlogForm() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ function PageBlogForm() {
       setLoading(true);
       setError(null);
 
-      const url = `http://localhost:8000/blog/api/posts/${postId}/`;
+      const url = `${API_HOST}/blog/api/posts/${postId}/`;
       try {
         const response = await Axios.get(url);
         setFieldValues(response.data);

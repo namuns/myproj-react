@@ -3,6 +3,7 @@ import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import Post from 'components/blog/BlogList';
 import { useNavigate } from 'react-router-dom';
+import { API_HOST } from 'Constants';
 
 function BlogList() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ function BlogList() {
     setLoading(true);
     setError(null);
 
-    const url = 'http://localhost:8000/blog/api/posts/';
+    const url = `${API_HOST}/blog/api/posts/`;
     Axios.get(url)
       .then(({ data }) => {
         console.group('정상 응답');
@@ -36,7 +37,7 @@ function BlogList() {
 
   const deletePost = (deletingPost) => {
     const { id: deletingPostId } = deletingPost;
-    const url = `http://localhost:8000/blog/api/posts/${deletingPostId}/`;
+    const url = `${API_HOST}/blog/api/posts/${deletingPostId}/`;
 
     setLoading(true);
     setError(null);

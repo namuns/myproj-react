@@ -3,6 +3,7 @@ import DebugStates from 'components/DebugStates';
 import { useState, useEffect } from 'react';
 import Review from 'components/Review';
 import { useNavigate } from 'react-router-dom';
+import { API_HOST } from 'Constants';
 
 function PageReviewList() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ function PageReviewList() {
     setLoading(true);
     setError(null);
 
-    const url = 'http://127.0.0.1:8000/shop/api/reviews/';
+    const url = `${API_HOST}/shop/api/reviews/`;
     // Promise 객체
     Axios.get(url)
       .then(({ data }) => {
@@ -35,7 +36,7 @@ function PageReviewList() {
 
   const deleteReview = (deletingReview) => {
     const { id: deletingReviewId } = deletingReview;
-    const url = `http://127.0.0.1:8000/shop/api/reviews/${deletingReviewId}/`;
+    const url = `${API_HOST}/shop/api/reviews/${deletingReviewId}/`;
 
     setLoading(true);
     setError(null);
