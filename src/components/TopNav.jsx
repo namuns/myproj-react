@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function TopNav() {
   return (
-    <div className="my-3 p-6 m-auto max-w-md m-auto">
+    <div className="my-3 p-6 mx-8 self-auto max-w-md">
       <ul className="flex gap-4">
         <li>
           <MyLink to="/accounts/login/">로그인</MyLink>
@@ -18,6 +18,9 @@ function TopNav() {
         </li>
         <li>
           <MyLink to="/blog/">블로그</MyLink>
+        </li>
+        <li>
+          <MyLink to="/examples/clock/">시계</MyLink>
         </li>
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DebugStates from 'components/DebugStates';
+import { axiosInstance } from 'api/base';
 
 function ReviewForm() {
   const [fieldValues, setFieldValues] = useState({ content: '', score: 0 });
@@ -19,7 +19,8 @@ function ReviewForm() {
     e.preventDefault();
     const url = `http://127.0.0.1:8000/shop/api/reviews/`;
 
-    Axios.post(url, fieldValues)
+    axiosInstance
+      .post(url, fieldValues)
       .then(() => {
         navigate('/reviews/');
       })
@@ -43,8 +44,9 @@ function ReviewForm() {
     console.log('editReview :', editingReview);
 
     const { id: editingReviewId } = editingReview;
-    const url = `http://127.0.0.1:8000/shop/api/reviews/${editingReviewId}/`;
-    Axios.patch(url)
+    const url = `/shop/api/reviews/${editingReviewId}/`;
+    axiosInstance
+      .patch(url)
       .then(({ data }) => {
         setReviewList(data);
       })
