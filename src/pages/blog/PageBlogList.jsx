@@ -1,9 +1,8 @@
-import Axios from 'axios';
 import DebugStates from 'components/DebugStates';
 import { useEffect, useState } from 'react';
 import Post from 'components/blog/BlogList';
 import { useNavigate } from 'react-router-dom';
-import { API_HOST } from 'Constants';
+import { axiosInstance } from 'api/base';
 
 function BlogList() {
   const [loading, setLoading] = useState(false);
@@ -19,8 +18,9 @@ function BlogList() {
     setLoading(true);
     setError(null);
 
-    const url = `${API_HOST}/blog/api/posts/`;
-    Axios.get(url)
+    const url = `/blog/api/posts/`;
+    axiosInstance
+      .get(url)
       .then(({ data }) => {
         console.group('정상 응답');
         console.groupEnd();
@@ -37,12 +37,13 @@ function BlogList() {
 
   const deletePost = (deletingPost) => {
     const { id: deletingPostId } = deletingPost;
-    const url = `${API_HOST}/blog/api/posts/${deletingPostId}/`;
+    const url = `/blog/api/posts/${deletingPostId}/`;
 
     setLoading(true);
     setError(null);
 
-    Axios.delete(url)
+    axiosInstance
+      .delete(url)
       .then(() => {
         setPostList((prevPostList) =>
           prevPostList.filter((post) => post.id !== deletingPostId),

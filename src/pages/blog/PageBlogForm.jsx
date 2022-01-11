@@ -2,9 +2,8 @@ import DebugStates from 'components/DebugStates';
 import { useNavigate, useParams } from 'react-router-dom';
 import PostForm from 'components/blog/BlogForm';
 import useFieldValues from 'hooks/useFieldValues';
-import Axios from 'axios';
 import { useEffect, useState } from 'react/cjs/react.development';
-import { API_HOST } from 'Constants';
+import { axiosInstance } from 'api/base';
 
 function PageBlogForm() {
   const [loading, setLoading] = useState(false);
@@ -22,9 +21,9 @@ function PageBlogForm() {
       setLoading(true);
       setError(null);
 
-      const url = `${API_HOST}/blog/api/posts/${postId}/`;
+      const url = `/blog/api/posts/${postId}/`;
       try {
-        const response = await Axios.get(url);
+        const response = await axiosInstance.get(url);
         setFieldValues(response.data);
       } catch (e) {
         setError(e);
@@ -36,14 +35,12 @@ function PageBlogForm() {
   }, [postId, setFieldValues, clearFieldValues]);
 
   const savePost = async () => {
-    const url = !postId
-      ? 'http://localhost:8000/blog/api/posts/'
-      : `http://localhost:8000/blog/api/posts/${postId}/`;
+    const url = !postId ? `/blog/api/posts/` : `/blog/api/posts/${postId}/`;
     try {
       if (!postId) {
-        await Axios.post(url, fieldValues);
+        await axiosInstance.post(url, fieldValues);
       } else {
-        await Axios.put(url, fieldValues);
+        await axiosInstance.put(url, fieldValues);
       }
       navigate('/blog/');
     } catch (e) {
