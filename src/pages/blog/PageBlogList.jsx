@@ -62,13 +62,13 @@ function BlogList() {
       {error && <div>통신 오류!</div>}
       <button
         onClick={() => refetch()}
-        className="bg-yellow-400 hover:bg-red-400"
+        className="text-purple-700 py-2 px-1 rounded-lg bg-purple-100 hover:bg-purple-200 font-medium transition-colors"
       >
         새로고침
       </button>
       <button
         onClick={() => navigate('/blog/new')}
-        className="bg-blue-400 hover:bg-slate-400"
+        className="text-white py-2 px-1 uppercase rounded bg-green-400 hover:bg-green-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
       >
         새 포스팅
       </button>

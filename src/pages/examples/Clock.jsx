@@ -26,12 +26,12 @@ function Clock() {
     <div className="clock-wrapper">
       <h2>시계</h2>
       <div className="clock">
-        <p class="date">
+        <p className="date">
           {date.getFullYear()}-{date.getMonth() + 1}-{date.getDate()}{' '}
           {WEEKDAYS[date.getDay()]}
         </p>
         {/* <p class="time">{date.toLocaleTimeString('en-us')}</p> */}
-        <p class="time">
+        <p className="time">
           {currentTime}
           {/* {date.getHours()}:{date.getMinutes()}:{date.getSeconds()} */}
         </p>

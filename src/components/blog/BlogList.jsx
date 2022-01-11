@@ -8,13 +8,13 @@ function Post({ post, handleDelete, handleEdit }) {
       <div className="text-right">
         <span
           onClick={() => handleEdit()}
-          className="hover:text-gray-400 cursor-pointer mr-1"
+          className="hover:text-gray-400 cursor-pointer mr-1 text-xs px-3 bg-blue-200 text-blue-800 rounded-full"
         >
           수정
         </span>
         <span
           onClick={() => handleDelete()}
-          className="hover:text-gray-400 cursor-pointer"
+          className="hover:text-gray-400 cursor-pointer text-xs px-3 bg-red-200 text-red-800 rounded-full"
         >
           삭제
         </span>

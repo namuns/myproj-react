@@ -17,7 +17,7 @@ function ReviewForm() {
     setError(null);
 
     e.preventDefault();
-    const url = `http://127.0.0.1:8000/shop/api/reviews/`;
+    const url = `/shop/api/reviews/`;
 
     axiosInstance
       .post(url, fieldValues)

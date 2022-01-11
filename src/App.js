@@ -22,25 +22,25 @@ function App() {
       <div className="">
         <TopNav />
         <Routes>
-          <Route path="/" element={<Navigate to="/reviews/" />} />
+          <Route path="/" element={<Navigate to="/blog/" />} />
           <Route path="/accounts/login/" element={<Login />} />
           <Route path="/accounts/profile/" element={<Profile />} />
           <Route path="/reviews/" element={<ReviewList />} />
           <Route path="reviews/new/" element={<ReviewForm />} />
           <Route path="/examples/components/" element={<Components />} />
           <Route path="/blog/" element={<BlogList />} />
-          <Route path="/blog/:postId/edit" element={<BlogForm />} />
-          <Route path="/blog/new" element={<BlogForm />} />
+          <Route path="/blog/:postId/edit/" element={<BlogForm />} />
+          <Route path="/blog/new/" element={<BlogForm />} />
           <Route path="/blog/:postId/" element={<PageBlogDetail />} />
-          <Route path="/examples/css-module" element={<CssModule />} />
-          <Route path="/examples/css-in-js" element={<CssInJs />} />
+          <Route path="/examples/css-module/" element={<CssModule />} />
+          <Route path="/examples/css-in-js/" element={<CssInJs />} />
         </Routes>
         <hr />
         윈도우 가로크기 : {windowWidth}px
       </div>
-      <Routes>
+      {/* <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
