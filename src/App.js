@@ -11,8 +11,12 @@ import BlogList from 'pages/blog/PageBlogList';
 import BlogForm from 'pages/blog/PageBlogForm';
 import PageBlogDetail from 'pages/blog/PageBlogDetail';
 import Clock from 'pages/examples/Clock';
+import useWindowWidth from 'pages/examples/useWindowWidth';
+import CssModule from 'pages/examples/CssModule';
+import CssInJs from 'pages/examples/CssInJs';
 
 function App() {
+  const windowWidth = useWindowWidth();
   return (
     <>
       <div className="">
@@ -28,7 +32,11 @@ function App() {
           <Route path="/blog/:postId/edit" element={<BlogForm />} />
           <Route path="/blog/new" element={<BlogForm />} />
           <Route path="/blog/:postId/" element={<PageBlogDetail />} />
+          <Route path="/examples/css-module" element={<CssModule />} />
+          <Route path="/examples/css-in-js" element={<CssInJs />} />
         </Routes>
+        <hr />
+        윈도우 가로크기 : {windowWidth}px
       </div>
       <Routes>
         <Route path="/examples/clock/" element={<Clock />} />
