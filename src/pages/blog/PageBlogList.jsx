@@ -11,8 +11,6 @@ function PageBlogList() {
       <BlogList />
 
       <Button onClick={() => navigate('/blog/new')}>새 포스팅 쓰기</Button>
-
-      <h2>광고</h2>
     </div>
   );
 }

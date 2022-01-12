@@ -5,11 +5,11 @@ function TopNav() {
     <div className="my-3">
       <ul className="flex place-content-between gap-4">
         <li className="px-4 py-3 font-semibold">
-          <MyLink to="/">남문수 블로그</MyLink>
+          <MyLink to="/">남문수의 블로그</MyLink>
         </li>
         <div className="flex">
           <MyLink to="/blog/">블로그</MyLink>
-          <MyLink to="/news/">뉴스룸</MyLink>
+          <MyLink to="/news/">뉴스</MyLink>
           <MyLink to="/accounts/login/">로그인</MyLink>
           <MyLink to="/accounts/profile/">프로필</MyLink>
         </div>

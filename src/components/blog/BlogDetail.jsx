@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import LoadingIndicator from 'components/LoadingIndicator';
 
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+
 function BlogDetail({ postId }) {
   const navigate = useNavigate();
 
@@ -20,10 +24,20 @@ function BlogDetail({ postId }) {
       { manual: true },
     );
 
-  const handleDelete = () => {
-    if (window.confirm('Are you sure?')) {
+  const handleDelete = (e) => {
+    e.preventDefault();
+    if (window.confirm('삭제하시겠습니까?')) {
       deletePost().then(() => {
-        navigate('/blog/');
+        navigate('/blog');
+        toast.success('삭제 완료!', {
+          position: 'top-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
     }
   };
@@ -72,6 +86,7 @@ function BlogDetail({ postId }) {
           >
             삭제하기
           </button>
+          <ToastContainer />
         </Link>
       </div>
     </div>

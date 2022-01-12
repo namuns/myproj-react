@@ -2,6 +2,7 @@ import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
+import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
@@ -38,6 +39,15 @@ function BlogForm({ postId, handleSave }) {
     }).then((response) => {
       const savedPost = response.data;
       if (handleSave) handleSave(savedPost);
+      toast.success('저장 완료!', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     });
   };
 
@@ -73,7 +83,7 @@ function BlogForm({ postId, handleSave }) {
             rows="10"
             value={fieldValues.content}
             onChange={handleFieldChange}
-            className="bg-gray-200 border border-gray-400"
+            className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           ></textarea>
           {saveErrorMessages.content?.map((message, index) => (
             <p key={index} className="text-xs text-red-400">
