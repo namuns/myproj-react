@@ -1,12 +1,15 @@
 import { useApiAxios } from 'api/base';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function ArticleDetail({ articleId }) {
-  const [{ data: article, loading, error }] = useApiAxios(
+  const [{ data: article, loading, error }, refetch] = useApiAxios(
     `/news/api/articles/${articleId}/`,
   );
 
   // ToDo: 데이터 통신
+
+  useEffect(() => {}, []);
 
   return (
     <div>

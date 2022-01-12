@@ -12,7 +12,7 @@ import PageBlogDetail from 'pages/blog/PageBlogDetail';
 import useWindowWidth from 'pages/examples/useWindowWidth';
 import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
-import PageNewsArticleForm from 'components/news/PageNewsArticleForm';
+import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 
 // import ContextApiSample from 'pages/examples/ContextApiSample';
 // import ContextApiSample2 from 'pages/examples/ContextApiSample2';
