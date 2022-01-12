@@ -6,6 +6,11 @@ import useFieldValues from 'hooks/useFieldValues';
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 function BlogForm({ postId, handleSave }) {
+  const [{ data: post, loading: getLoading, error: getError }] = useApiAxios(
+    `/blog/api/posts/${postId}/`,
+    { manual: !postId },
+  );
+
   const [
     {
       loading: saveLoading,
@@ -15,13 +20,15 @@ function BlogForm({ postId, handleSave }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: `/blog/api/posts/`,
-      method: 'POST',
+      url: !postId ? `/blog/api/posts/` : `/blog/api/posts/${postId}`,
+      method: !postId ? 'POST' : 'PUT',
     },
     { manual: true },
   );
 
-  const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
+  const { fieldValues, handleFieldChange } = useFieldValues(
+    post || INIT_FIELD_VALUES,
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();

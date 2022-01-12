@@ -11,7 +11,7 @@ function BlogDetail({ postId }) {
     `/blog/api/posts/${postId}/`,
   );
 
-  const [{ loading: deleteLoading, error: deleteError }, deleteArticle] =
+  const [{ loading: deleteLoading, error: deleteError }, deletePost] =
     useApiAxios(
       {
         url: `/blog/api/posts/${postId}/`,
@@ -22,7 +22,7 @@ function BlogDetail({ postId }) {
 
   const handleDelete = () => {
     if (window.confirm('Are you sure?')) {
-      deleteArticle().then(() => {
+      deletePost().then(() => {
         navigate('/blog/');
       });
     }
