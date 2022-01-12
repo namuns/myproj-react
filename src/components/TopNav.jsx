@@ -19,6 +19,12 @@ function TopNav() {
         <li className="my-1 text-sm leading-5 text-gray-700 transition-colors duration-200 transform dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline md:mx-4 md:my-0">
           <MyLink to="/blog/">블로그</MyLink>
         </li>
+        <li>
+          <MyLink to="/examples/context-api/">Context API</MyLink>
+        </li>
+        <li>
+          <MyLink to="/examples/context-api-2/">Context API #2</MyLink>
+        </li>
         {/* <li>
           <MyLink to="/examples/clock/">시계</MyLink>
         </li>
