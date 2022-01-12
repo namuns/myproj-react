@@ -2,7 +2,7 @@ import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import BlogSummary from './BlogSummary';
 
-function PostList() {
+function BlogList() {
   const [{ data: postList, loading, error }, refetch] =
     useApiAxios('/blog/api/posts/');
 
@@ -16,4 +16,4 @@ function PostList() {
     </div>
   );
 }
-export default PostList;
+export default BlogList;
