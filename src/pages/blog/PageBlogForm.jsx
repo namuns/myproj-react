@@ -5,7 +5,7 @@ function PageBlogForm() {
   const navigate = useNavigate();
   return (
     <BlogForm
-      articleId={null}
+      postId={null}
       handleSave={(savedPost) => navigate(`/blog/${savedPost.id}/`)}
     />
   );

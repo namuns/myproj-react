@@ -6,9 +6,16 @@ import useFieldValues from 'hooks/useFieldValues';
 const INIT_FIELD_VALUES = { title: '', content: '' };
 
 function BlogForm({ postId, handleSave }) {
-  const [{ loading: saveLoading, error: saveError }, saveRequest] = useApiAxios(
+  const [
     {
-      url: '/news/api/articles/',
+      loading: saveLoading,
+      error: saveError,
+      errorMessages: saveErrorMessages,
+    },
+    saveRequest,
+  ] = useApiAxios(
+    {
+      url: `/blog/api/posts/`,
       method: 'POST',
     },
     { manual: true },
@@ -44,6 +51,11 @@ function BlogForm({ postId, handleSave }) {
             type="text"
             className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
+          {saveErrorMessages.title?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
 
         <div>
@@ -56,6 +68,11 @@ function BlogForm({ postId, handleSave }) {
             onChange={handleFieldChange}
             className="bg-gray-200 border border-gray-400"
           ></textarea>
+          {saveErrorMessages.content?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
 
         <button
@@ -66,7 +83,10 @@ function BlogForm({ postId, handleSave }) {
           저장하기
         </button>
       </form>
-      <DebugStates fieldValues={fieldValues} />
+      <DebugStates
+        saveErrorMessages={saveErrorMessages}
+        fieldValues={fieldValues}
+      />
     </div>
   );
 }
