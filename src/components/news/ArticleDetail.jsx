@@ -1,20 +1,45 @@
 import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import LoadingIndicator from 'components/LoadingIndicator';
 
 function ArticleDetail({ articleId }) {
+  const navigate = useNavigate();
   const [{ data: article, loading, error }, refetch] = useApiAxios(
     `/news/api/articles/${articleId}/`,
   );
 
-  // ToDo: 데이터 통신
+  const [{ loading: deleteLoading, error: deleteError }, deleteArticle] =
+    useApiAxios(
+      {
+        url: `/news/api/articles/${articleId}/`,
+        method: 'DELETE',
+      },
+      { manual: true },
+    );
 
-  useEffect(() => {}, []);
+  const handleDelete = () => {
+    if (window.confirm('Are you sure?')) {
+      // REST API 에서는 DELETE 요청에 대한 응답이 없습니다.
+      deleteArticle().then(() => {
+        navigate('/news/');
+      });
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <div>
-      {loading && '로딩 중 ...'}
-      {error && '에러가 발생했습니다.'}
+      {loading && <LoadingIndicator />}
+      {deleteLoading && <LoadingIndicator>삭제 중 ...</LoadingIndicator>}
+      {error &&
+        `로딩 중 에러가 발생했습니다. (${error.response.status} ${error.response.statusText})`}
+      {deleteError &&
+        `삭제 요청 중 에러가 발생했습니다. (${deleteError.response.status} ${deleteError.response.statusText})`}
+
       {article && (
         <>
           <h3 className="text-2xl my-5">{article.title}</h3>
@@ -35,6 +60,13 @@ function ArticleDetail({ articleId }) {
         <Link to={`/news/${articleId}/edit/`} className="hover:text-red-400">
           수정하기
         </Link>
+        <button
+          disabled={deleteLoading}
+          onClick={handleDelete}
+          className="hover:text-red-400"
+        >
+          삭제하기
+        </button>
       </div>
     </div>
   );
