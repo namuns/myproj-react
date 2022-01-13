@@ -13,6 +13,7 @@ import useWindowWidth from 'pages/examples/useWindowWidth';
 import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
 import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
+import BookList from 'components/library/BookList';
 
 // import ContextApiSample from 'pages/examples/ContextApiSample';
 // import ContextApiSample2 from 'pages/examples/ContextApiSample2';
@@ -44,6 +45,7 @@ function App() {
             path="/news/:articleId/edit/"
             element={<PageNewsArticleForm />}
           />
+          <Route path="/library/" element={<BookList />} />
 
           {/* <Route path="/examples/css-module/" element={<CssModule />} />
           <Route path="/examples/css-in-js/" element={<CssInJs />} />
