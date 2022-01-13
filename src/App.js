@@ -14,6 +14,7 @@ import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
 import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 import PageLibraryIndex from 'pages/library/PageLibraryIndex';
+import PageLibraryBookForm from 'pages/library/PageLibraryBookForm';
 
 // import ContextApiSample from 'pages/examples/ContextApiSample';
 // import ContextApiSample2 from 'pages/examples/ContextApiSample2';
@@ -46,6 +47,7 @@ function App() {
             element={<PageNewsArticleForm />}
           />
           <Route path="/library/" element={<PageLibraryIndex />} />
+          <Route path="/library/new/" element={<PageLibraryBookForm />} />
 
           {/* <Route path="/examples/css-module/" element={<CssModule />} />
           <Route path="/examples/css-in-js/" element={<CssInJs />} />
