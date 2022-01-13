@@ -95,7 +95,7 @@ function BlogForm({ postId, handleSave }) {
         <button
           type="submit"
           className="bg-blue-100 my-3"
-          onClick={() => handleSubmit()}
+          onClick={(e) => handleSubmit(e)}
         >
           저장하기
         </button>

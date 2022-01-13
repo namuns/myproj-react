@@ -6,7 +6,6 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 
 function BlogDetail({ postId }) {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ function BlogDetail({ postId }) {
     e.preventDefault();
     if (window.confirm('삭제하시겠습니까?')) {
       deletePost().then(() => {
-        navigate('/blog');
+        navigate('/blog/');
         toast.success('삭제 완료!', {
           position: 'top-center',
           autoClose: 2000,
@@ -82,11 +81,10 @@ function BlogDetail({ postId }) {
           <button
             disabled={deleteLoading}
             onClick={handleDelete}
-            className="hover:text-red-400"
+            className=" hover:text-red-400 px-3 cursor-pointer"
           >
             삭제하기
           </button>
-          <ToastContainer />
         </Link>
       </div>
     </div>
