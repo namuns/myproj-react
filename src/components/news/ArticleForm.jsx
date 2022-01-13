@@ -4,6 +4,8 @@ import H2 from 'components/H2';
 import LoadingIndicator from 'components/LoadingIndicator';
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
+import { useEffect } from 'react';
+import produce from 'immer';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
 // articlId==undefined : 생성
@@ -34,15 +36,42 @@ function ArticleForm({ articleId, handleDidSave }) {
     { manual: true },
   );
 
-  const { fieldValues, handleFieldChange } = useFieldValues(
+  const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     article || INIT_FIELD_VALUES,
   );
+
+  useEffect(() => {
+    // 서버로 photonull이 전달이 되면, 아래 오류가 발생
+    //fieldValues에서 photo만 제거해주면 주거나,
+    //   - 대응 : fieldValues에서 photo만 제거해주거나, photo=null이라면 빈 문자열로 변경
+    // setFieldValues((prevFieldValues) => ({ ...prevFieldValues, photo: '' }));
+    // }, [article]);
+
+    setFieldValues((prevFieldValues) => {
+      const newFieldValues = produce(prevFieldValues, (draft) => {
+        draft.photo = '';
+      });
+      return newFieldValues;
+    });
+  }, [article]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // fieldValues : 객체 ( 파일을 제외하고는)
+    // 파일을 업로드 하려면, formData 인스턴스를 써야한다.
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        fileList.forEach((file) => formData.append(name, file));
+      } else {
+        formData.append(name, value);
+      }
+    });
+
     saveRequest({
-      data: fieldValues,
+      data: formData,
     }).then((response) => {
       const savedPost = response.data;
       if (handleDidSave) handleDidSave(savedPost);
@@ -75,11 +104,26 @@ function ArticleForm({ articleId, handleDidSave }) {
         <div className="my-3">
           <textarea
             name="content"
-            value={fieldValues.content}
+            value={fieldValues.photo}
             onChange={handleFieldChange}
             className="p-1 bg-gray-100 w-full h-80 outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
           {saveErrorMessages.content?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
+        </div>
+
+        <div className="my-3">
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            name="photo"
+            //value="" 는 지정하지 않는다
+            onChange={handleFieldChange}
+          />
+          {saveErrorMessages.photo?.map((message, index) => (
             <p key={index} className="text-xs text-red-400">
               {message}
             </p>
