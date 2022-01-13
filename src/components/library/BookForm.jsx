@@ -22,7 +22,9 @@ function BookForm({ bookId, handleDidSave }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: !bookId ? '/library/api/books/' : `/library/api/books/${bookId}/`,
+      url: !bookId
+        ? '/library/api/books/'
+        : `/library/api/books/${bookId}/edit`,
       method: !bookId ? 'POST' : 'PUT',
     },
     { manual: true },

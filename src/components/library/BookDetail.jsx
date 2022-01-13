@@ -53,6 +53,7 @@ function BookDetail({ bookId }) {
       <hr className="my-3" />
       <div className="flex gap-4 mt-3 mb-10">
         <Link to="/library/">목록으로</Link>
+        <Link to={`/library/${bookId}/edit/`}>수정하기</Link>
         <button onClick={handleDelete}>삭제하기</button>
       </div>
     </div>
