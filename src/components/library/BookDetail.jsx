@@ -1,11 +1,36 @@
 import { useApiAxios } from 'api/base';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoadingIndicator from 'components/LoadingIndicator';
+import { useEffect } from 'react';
 
 function BookDetail({ bookId }) {
-  const [{ data: book, loading, error }] = useApiAxios(
-    `/library/api/books/${bookId}/`,
+  const navigate = useNavigate();
+
+  const [{ data: book, loading, error }, refetch] = useApiAxios(
+    { url: `/library/api/books/${bookId}/` },
+    { manual: true },
   );
+
+  const [{ loading: deleteLoading, error: deleteError }, deleteBook] =
+    useApiAxios(
+      {
+        url: `/library/api/books/${bookId}/`,
+        method: 'DELETE',
+      },
+      { manual: true },
+    );
+
+  const handleDelete = () => {
+    if (window.confirm('정말 삭제 할까요?')) {
+      deleteBook().then(() => {
+        navigate('/library/');
+      });
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <div>
@@ -28,6 +53,7 @@ function BookDetail({ bookId }) {
       <hr className="my-3" />
       <div className="flex gap-4 mt-3 mb-10">
         <Link to="/library/">목록으로</Link>
+        <button onClick={handleDelete}>삭제하기</button>
       </div>
     </div>
   );
