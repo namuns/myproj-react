@@ -12,12 +12,18 @@ function ArticleList() {
   }, []);
 
   return (
-    <div>
-      <h3>뉴스 기사 목록</h3>
+    <div className="my-5">
       {loading && '로딩 중...'}
       {error && '로딩 중 에러가 발생!'}
       {articleList &&
-        articleList.map((article) => <ArticleSummary article={article} />)}
+        articleList.map((article) => (
+          <div
+            key={article.id}
+            className="w-full md:w-1/2 xl:w-1/3 px-4 transition-transform hover:-translate-y-5 duration-300 "
+          >
+            <ArticleSummary article={article} />
+          </div>
+        ))}
       <DebugStates articleList={articleList} loading={loading} error={error} />
     </div>
   );
