@@ -27,7 +27,7 @@ function BookDetail({ bookId }) {
       )}
       <hr className="my-3" />
       <div className="flex gap-4 mt-3 mb-10">
-        <Link to="/books/">목록으로</Link>
+        <Link to="/library/">목록으로</Link>
       </div>
     </div>
   );
