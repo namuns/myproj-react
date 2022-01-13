@@ -1,11 +1,14 @@
 import BlogForm from 'components/blog/BlogForm';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function PageBlogForm() {
   const navigate = useNavigate();
+
+  const { postId } = useParams();
+
   return (
     <BlogForm
-      postId={null}
+      postId={postId}
       handleSave={(savedPost) => navigate(`/blog/${savedPost.id}/`)}
     />
   );

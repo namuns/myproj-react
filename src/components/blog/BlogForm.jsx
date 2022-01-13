@@ -2,6 +2,7 @@ import { useApiAxios } from 'api/base';
 import DebugStates from 'components/DebugStates';
 import LoadingIndicator from 'components/LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = { title: '', content: '' };
@@ -21,7 +22,7 @@ function BlogForm({ postId, handleSave }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: !postId ? `/blog/api/posts/` : `/blog/api/posts/${postId}`,
+      url: !postId ? '/blog/api/posts/' : `/blog/api/posts/${postId}/`,
       method: !postId ? 'POST' : 'PUT',
     },
     { manual: true },
@@ -101,6 +102,9 @@ function BlogForm({ postId, handleSave }) {
         </button>
       </form>
       <DebugStates
+        post={post}
+        getLoading={getLoading}
+        getError={getError}
         saveErrorMessages={saveErrorMessages}
         fieldValues={fieldValues}
       />
