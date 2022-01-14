@@ -40,7 +40,24 @@ function BookDetail({ bookId }) {
       {book && (
         <>
           <h3 className="text-2xl my-5">{book.title}</h3>
-          {book.photo && <img src={book.photo} alt={book.title} />}
+
+          {/* 
+          {book.photo && (
+            <img src={book.photo} alt={book.title} width="576" height="1024" />
+          )} */}
+
+          <div class="post-media container large">
+            <div class="u-placeholder horizontal">
+              <img
+                class="object-center mx-8"
+                src={book.photo}
+                alt={book.title}
+                width="476"
+                height="924"
+              />
+            </div>
+          </div>
+
           <div>
             {book.content.split(/[\r\n]+/).map((line, index) => (
               <p className="my-3" key={index}>
