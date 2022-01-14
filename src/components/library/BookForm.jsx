@@ -95,6 +95,20 @@ function BookForm({ bookId, handleDidSave }) {
           ))}
         </div>
 
+        <select
+          name="score"
+          value={fieldValues.score}
+          onChange={handleFieldChange}
+          className="bg-gray-100 border border-gray-400"
+        >
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+
         <div className="my-3">
           <textarea
             name="content"
