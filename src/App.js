@@ -9,10 +9,14 @@ import './App.css';
 import BlogList from 'pages/blog/PageBlogList';
 import BlogForm from 'pages/blog/PageBlogForm';
 import PageBlogDetail from 'pages/blog/PageBlogDetail';
-import useWindowWidth from 'pages/examples/useWindowWidth';
+// import useWindowWidth from 'pages/examples/useWindowWidth';
 import PageNewsIndex from 'pages/news/PageNewsIndex';
 import PageNewsArticleDetail from 'pages/news/PageNewsArticleDetail';
 import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
+import PageLibraryIndex from 'pages/library/PageLibraryIndex';
+import PageLibraryBookForm from 'pages/library/PageLibraryBookForm';
+import PageLibraryBookDetail from 'pages/library/PageLibraryBookDetail';
+import BookForm from 'components/library/BookForm';
 
 // import ContextApiSample from 'pages/examples/ContextApiSample';
 // import ContextApiSample2 from 'pages/examples/ContextApiSample2';
@@ -21,7 +25,7 @@ import PageNewsArticleForm from 'pages/news/PageNewsArticleForm';
 // import Clock from 'pages/examples/Clock';
 
 function App() {
-  const windowWidth = useWindowWidth();
+  // const windowWidth = useWindowWidth();
   return (
     <>
       <div className="">
@@ -44,6 +48,13 @@ function App() {
             path="/news/:articleId/edit/"
             element={<PageNewsArticleForm />}
           />
+          <Route path="/library/" element={<PageLibraryIndex />} />
+          <Route path="/library/new/" element={<PageLibraryBookForm />} />
+          <Route path="/library/:bookId/" element={<PageLibraryBookDetail />} />
+          <Route
+            path="/library/:bookId/edit/"
+            element={<PageLibraryBookForm />}
+          />
 
           {/* <Route path="/examples/css-module/" element={<CssModule />} />
           <Route path="/examples/css-in-js/" element={<CssInJs />} />
@@ -54,7 +65,7 @@ function App() {
           /> */}
         </Routes>
         <hr />
-        윈도우 가로크기 : {windowWidth}px
+        {/* 윈도우 가로크기 : {windowWidth}px */}
       </div>
       {/* <Routes>
         <Route path="/examples/clock/" element={<Clock />} />

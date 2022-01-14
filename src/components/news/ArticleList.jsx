@@ -12,7 +12,7 @@ function ArticleList() {
   }, []);
 
   return (
-    <div className="my-5">
+    <div className="my-5 ">
       {loading && '로딩 중...'}
       {error && '로딩 중 에러가 발생!'}
       {articleList &&
