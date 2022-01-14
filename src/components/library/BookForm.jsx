@@ -6,7 +6,7 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useEffect } from 'react';
 import produce from 'immer';
 
-const INIT_FIELD_VALUES = { title: '', author: '', content: '' };
+const INIT_FIELD_VALUES = { title: '', author: '', content: '', score: 5 };
 
 function BookForm({ bookId, handleDidSave }) {
   const [{ data: book, loading: getLoading, error: getError }] = useApiAxios(
@@ -22,25 +22,23 @@ function BookForm({ bookId, handleDidSave }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: !bookId
-        ? '/library/api/books/'
-        : `/library/api/books/${bookId}/edit`,
+      url: !bookId ? '/library/api/books/' : `/library/api/books/${bookId}/`,
       method: !bookId ? 'POST' : 'PUT',
     },
     { manual: true },
   );
+
+  console.log('bookId :', bookId);
 
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     book || INIT_FIELD_VALUES,
   );
 
   useEffect(() => {
-    setFieldValues((prevFieldValues) => {
-      const newFieldValues = produce(prevFieldValues, (draft) => {
-        draft.photo = '';
-      });
-      return newFieldValues;
-    });
+    setFieldValues((prevFieldValues) => ({
+      ...prevFieldValues,
+      photo: '',
+    }));
   }, [book]);
 
   const handleSubmit = (e) => {
@@ -77,9 +75,12 @@ function BookForm({ bookId, handleDidSave }) {
             value={fieldValues.title}
             onChange={handleFieldChange}
             type="text"
+            className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
-          {saveErrorMessages.title?.map((message) => (
-            <p>{message}</p>
+          {saveErrorMessages.title?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
           ))}
         </div>
 
@@ -89,9 +90,12 @@ function BookForm({ bookId, handleDidSave }) {
             value={fieldValues.author}
             onChange={handleFieldChange}
             type="text"
+            className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
-          {saveErrorMessages.author?.map((message) => (
-            <p>{message}</p>
+          {saveErrorMessages.author?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
           ))}
         </div>
 
@@ -99,7 +103,7 @@ function BookForm({ bookId, handleDidSave }) {
           name="score"
           value={fieldValues.score}
           onChange={handleFieldChange}
-          className="bg-gray-100 border border-gray-400"
+          className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
         >
           <option>0</option>
           <option>1</option>
@@ -114,9 +118,12 @@ function BookForm({ bookId, handleDidSave }) {
             name="content"
             value={fieldValues.content}
             onChange={handleFieldChange}
+            className="p-1 bg-gray-100 w-full outline-none focus:border focus:border-gray-400 focus:border-dashed"
           />
-          {saveErrorMessages.content?.map((message) => (
-            <p>{message}</p>
+          {saveErrorMessages.content?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
           ))}
         </div>
 
@@ -134,7 +141,7 @@ function BookForm({ bookId, handleDidSave }) {
           ))}
         </div>
 
-        <div className="my-3">
+        <div>
           <Button>저장하기</Button>
         </div>
       </form>

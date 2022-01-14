@@ -7,8 +7,9 @@ function PageLibraryBookForm() {
   const { bookId } = useParams();
 
   return (
+    // <div>bookId: {bookId}</div>
     <BookForm
-      articleId={bookId}
+      bookId={bookId}
       handleDidSave={(savedPost) => navigate(`/library/${savedPost.id}/`)}
     />
   );

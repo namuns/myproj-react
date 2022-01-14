@@ -51,7 +51,10 @@ function App() {
           <Route path="/library/" element={<PageLibraryIndex />} />
           <Route path="/library/new/" element={<PageLibraryBookForm />} />
           <Route path="/library/:bookId/" element={<PageLibraryBookDetail />} />
-          <Route path="/library/:bookId/edit/" element={<BookForm />} />
+          <Route
+            path="/library/:bookId/edit/"
+            element={<PageLibraryBookForm />}
+          />
 
           {/* <Route path="/examples/css-module/" element={<CssModule />} />
           <Route path="/examples/css-in-js/" element={<CssInJs />} />
