@@ -11,19 +11,19 @@ function BookDetail({ bookId }) {
     { manual: true },
   );
 
-  const [{ loading: deleteLoading, error: deleteError }, deleteBook] =
-    useApiAxios(
-      {
-        url: `/library/api/books/${bookId}/`,
-        method: 'DELETE',
-      },
-      { manual: true },
-    );
+  const [{}, deleteBook] = useApiAxios(
+    {
+      url: `/library/api/books/${bookId}/`,
+      method: 'DELETE',
+    },
+    { manual: true },
+  );
 
   const handleDelete = () => {
     if (window.confirm('정말 삭제 할까요?')) {
       deleteBook().then(() => {
         navigate('/library/');
+        window.location.reload();
       });
     }
   };

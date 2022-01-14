@@ -4,11 +4,14 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import { useApiAxios } from 'api/base';
 import useFieldValues from 'hooks/useFieldValues';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import produce from 'immer';
 
 const INIT_FIELD_VALUES = { title: '', author: '', content: '', score: 5 };
 
 function BookForm({ bookId, handleDidSave }) {
+  const navigate = useNavigate();
+
   const [{ data: book, loading: getLoading, error: getError }] = useApiAxios(
     `/library/api/books/${bookId}/`,
     { manual: !bookId },
@@ -58,6 +61,9 @@ function BookForm({ bookId, handleDidSave }) {
       data: formData,
     }).then((response) => {
       const savedPost = response.data;
+      navigate('/library/');
+      window.location.reload();
+
       if (handleDidSave) handleDidSave(savedPost);
     });
   };
