@@ -1,19 +1,5 @@
-import Loading from './icons/Loading';
-
-function LoadingIndicator({ children }) {
-  return (
-    <span>
-      <Loading className="w-10 h-10" />
-      <span className="text-xs">
-        {!children && 'Loading ...'}
-        {children}
-      </span>
-    </span>
-  );
-}
-
 // ref: https://loading.io/
-function LoadingImage({ className }) {
+function Loading({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -174,4 +160,4 @@ function LoadingImage({ className }) {
   );
 }
 
-export default LoadingIndicator;
+export default Loading;
