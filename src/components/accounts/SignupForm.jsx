@@ -1,17 +1,15 @@
 import Button from 'components/Button';
 import DebugStates from 'components/DebugStates';
 import { useApiAxios } from 'api/base';
-import useAuth from 'hooks/useAuth';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
 
-const INITIAL_AUTH = { isLoggedIn: false };
 const INITIAL_FIELD_VALUES = { username: '', password: '', password2: '' };
 
 function SignupForm() {
   const navigate = useNavigate();
 
-  const [{ loading, error, errorMessages }, refetch] = useApiAxios(
+  const [{ error, errorMessages, non_field_errors }, refetch] = useApiAxios(
     {
       url: '/accounts/api/signup/',
       method: 'POST',
@@ -45,15 +43,22 @@ function SignupForm() {
       )}
 
       <form onSubmit={handleSubmit}>
+        {error &&
+          `에러가 발생했습니다. ${error.response?.status} ${error.response?.statusText}`}
         <div className="my-3">
           <input
             type="text"
             name="username"
             value={fieldValues.username}
             onChange={handleFieldChange}
-            placeholder="UserName"
+            placeholder="아이디를 입력해주세요."
             className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
           />
+          {errorMessages.username?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
         <div className="my-3">
           <input
@@ -61,9 +66,14 @@ function SignupForm() {
             name="password"
             value={fieldValues.password}
             onChange={handleFieldChange}
-            placeholder="Password"
+            placeholder="비밀번호"
             className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
           />
+          {errorMessages.password?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
         </div>
         <div>
           <input
@@ -71,9 +81,15 @@ function SignupForm() {
             name="password2"
             value={fieldValues.password2}
             onChange={handleFieldChange}
-            placeholder="Password"
+            placeholder="비밀번호를 한 번 더 입력해주세요. "
             className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
           />
+          {errorMessages.non_field_errors?.map((message, index) => (
+            <p key={index} className="text-xs text-red-400">
+              {message}
+            </p>
+          ))}
+          {non_field_errors?.response?.error}
         </div>
         <div>
           <Button>가입하기</Button>
