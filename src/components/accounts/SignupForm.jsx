@@ -5,16 +5,15 @@ import useAuth from 'hooks/useAuth';
 import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
 
-const INITIAL_FIELD_VALUES = { username: '', password: '' };
+const INITIAL_AUTH = { isLoggedIn: false };
+const INITIAL_FIELD_VALUES = { username: '', password: '', password2: '' };
 
-function LoginForm() {
+function SignupForm() {
   const navigate = useNavigate();
 
-  const [auth, _, login] = useAuth();
-
-  const [{ loading, error }, requestToken] = useApiAxios(
+  const [{ loading, error, errorMessages }, refetch] = useApiAxios(
     {
-      url: '/accounts/api/token/',
+      url: '/accounts/api/signup/',
       method: 'POST',
     },
     { manual: true },
@@ -26,37 +25,23 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    requestToken({ data: fieldValues }).then((response) => {
-      const { access, refresh, username, first_name, last_name } =
-        response.data;
-      // TODO: access/refresh token을 브라우저 어딘가에 저장해야 한다.
-      // 저장해서 페이지 새로고침이 발생하더라도 그 token이 유실되지 않아야 한다.
+    refetch({ data: fieldValues }).then((saveRequest) => {
+      const { username, password, password2 } = saveRequest.data;
 
-      login({
-        access,
-        refresh,
-        username,
-        first_name,
-        last_name,
-      });
-
-      console.log('access :', access);
-      console.log('refresh :', refresh);
       console.log('username :', username);
-      console.log('first_name :', first_name);
-      console.log('last_name :', last_name);
+      console.log('password :', password);
+      console.log('password2 :', password2);
 
-      // 인증 후, 이동할 주소를 지정합니다.
       navigate('/');
     });
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>회원가입</h2>
 
       {error?.response?.status === 401 && (
-        <div className="text-red-400">로그인에 실패했습니다.</div>
+        <div className="text-red-400">회원가입에 실패했습니다.</div>
       )}
 
       <form onSubmit={handleSubmit}>
@@ -66,7 +51,7 @@ function LoginForm() {
             name="username"
             value={fieldValues.username}
             onChange={handleFieldChange}
-            placeholder="username"
+            placeholder="UserName"
             className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
           />
         </div>
@@ -76,16 +61,28 @@ function LoginForm() {
             name="password"
             value={fieldValues.password}
             onChange={handleFieldChange}
-            placeholder="password"
+            placeholder="Password"
             className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
           />
         </div>
-        <Button>로그인</Button>
+        <div>
+          <input
+            type="password"
+            name="password2"
+            value={fieldValues.password2}
+            onChange={handleFieldChange}
+            placeholder="Password"
+            className="p-3 bg-gray-100 focus:outline-none focus:border focus:border-gray-400 w-full"
+          />
+        </div>
+        <div>
+          <Button>가입하기</Button>
+        </div>
       </form>
 
-      <DebugStates auth={auth} fieldValues={fieldValues} />
+      <DebugStates fieldValues={fieldValues} />
     </div>
   );
 }
 
-export default LoginForm;
+export default SignupForm;

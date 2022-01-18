@@ -18,6 +18,7 @@ import PageLibraryIndex from 'pages/library/PageLibraryIndex';
 import PageLibraryBookForm from 'pages/library/PageLibraryBookForm';
 import PageLibraryBookDetail from 'pages/library/PageLibraryBookDetail';
 import BookForm from 'components/library/BookForm';
+import PageSignup from 'pages/accounts/PageSignup';
 
 // import ContextApiSample from 'pages/examples/ContextApiSample';
 // import ContextApiSample2 from 'pages/examples/ContextApiSample2';
@@ -35,6 +36,8 @@ function App() {
           <Route path="/" element={<Navigate to="/blog/" />} />
           <Route path="/accounts/login/" element={<PageLogin />} />
           <Route path="/accounts/profile/" element={<PageProfile />} />
+          <Route path="/accounts/signup/" element={<PageSignup />} />
+
           <Route path="/reviews/" element={<ReviewList />} />
           <Route path="reviews/new/" element={<ReviewForm />} />
           <Route path="/examples/components/" element={<Components />} />
