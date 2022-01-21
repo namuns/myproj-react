@@ -1,4 +1,4 @@
-import useAuth from 'hooks/useAuth';
+import { useAuth } from 'contexts/AuthContext';
 import { Link, NavLink } from 'react-router-dom';
 
 function TopNav() {
@@ -32,7 +32,7 @@ function TopNav() {
             </>
           )}
           <MyLink to="/library/">도서관</MyLink>
-          <MyLink to="/accounts/login/">로그인</MyLink>
+          <MyLink to="/accounts/logout/">로그아웃</MyLink>
           <MyLink to="/accounts/profile/">프로필</MyLink>
         </div>
         {/* <li>

@@ -1,7 +1,7 @@
 import DebugStates from 'components/DebugStates';
 import { useEffect } from 'react';
 import { useApiAxios } from 'api/base';
-import useAuth from 'hooks/useAuth';
+import { useAuth } from 'contexts/AuthContext';
 import ArticleSummary from './ArticleSummary';
 
 function ArticleList() {
