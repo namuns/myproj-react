@@ -11,17 +11,18 @@ function TopNav() {
     <div className="my-3">
       <ul className="flex place-content-between gap-4">
         <li className="px-4 py-3 font-semibold">
-          <MyLink to="/">남문수의 블로그</MyLink>
+          <NavLink to="/">남문수의 블로그</NavLink>
         </li>
         <div className="flex">
           <MyLink to="/blog/">블로그</MyLink>
           <MyLink to="/news/">뉴스</MyLink>
+          <MyLink to="/library/">도서관</MyLink>
           {!auth.isLoggedIn && (
             <>
               <MyLink to="/accounts/login/">로그인</MyLink>
+              <MyLink to="/accounts/signup/">회원가입</MyLink>
             </>
           )}
-          <MyLink to="/accounts/signup/">회원가입</MyLink>
 
           {auth.isLoggedIn && (
             <>
@@ -31,9 +32,6 @@ function TopNav() {
               </button>
             </>
           )}
-          <MyLink to="/library/">도서관</MyLink>
-          <MyLink to="/accounts/logout/">로그아웃</MyLink>
-          <MyLink to="/accounts/profile/">프로필</MyLink>
         </div>
         {/* <li>
           <MyLink to="/examples/context-api/">Context API</MyLink>
